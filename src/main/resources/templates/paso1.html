@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xml:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Paso 1</title>
 </head>
 <body>
 
-    <form method="post" th:object="${}" th:action="@{/seguros/calculos/cotizacion/paso1}">
+    <form method="post" th:object="${cotizacionSeguro}" th:action="@{/seguros/calculos/cotizacion/paso2}">
 
-        <button>Enviar</button>
+        <label for="name">Nombre y apellidos</label>
+        <input id="name" type="text" th:field="*{nombre}"/>
+        <br/>
+        <label for="edad">Edad</label>
+        <input id="edad" type="number" th:field="*{edad}"/>
+        <br/>
+        <label for="anioCarnet">Años del carnet</label>
+        <input id="anioCarnet" type="number" th:field="*{aniosCarnet}"/>
+        <br/>
+
+        <button type="submit">Siguiente</button>
 
     </form>
 

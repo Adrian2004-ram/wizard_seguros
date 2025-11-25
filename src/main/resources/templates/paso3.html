@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Paso 3</title>
+</head>
+<body>
+
+<form method="post" th:object="${cotizacionSeguro}" th:action="@{/seguros/calculos/cotizacion/paso3}">
+
+  <label>Tipo de Cobertura: </label>
+  <input id="tipoCobertura1" type="radio" th:field="*{tipoCobertura}" value="TERCERO"/><label for="tipoCobertura1">tercero</label>
+  <input id="tipoCobertura2" type="radio" th:field="*{tipoCobertura}" value="TERCERO_MAS_LUNAS"/><label for="tipoCobertura2">tercero+lunas</label>
+  <input id="tipoCobertura3" type="radio" th:field="*{tipoCobertura}" value="TODO_RIESGO"/><label for="tipoCobertura3">todo riesgo</label>
+  <br/>
+  <label>Asistencia en carretera: </label>
+  <input id="asistencia1" type="radio" th:field="*{asistencia}" value="true"/><label for="asistencia1">Si</label>
+  <input id="assistencia2" type="radio" th:field="*{asistencia}" value="false"/><label for="assistencia2">No</label>
+  <br/>
+  <label>Vehiculo en carreterra: </label>
+  <input id="vahiculoSus1" type="radio" th:field="*{asistencia}" value="true"/><label for="vahiculoSus1">Si</label>
+  <input id="vahiculoSus2" type="radio" th:field="*{asistencia}" value="false"/><label for="vahiculoSus2">No</label>
+  <br/>
+
+  <h1>Resumen</h1>
+
+  <div>
+    Conductor: <span th:text="${datosConductor}"></span>
+  </div>
+  <div>
+    Vehiculo: <span th:text="${datosVehiculo}"></span>
+  </div>
+  <div>
+    Cobertura: <span th:text="${datosCobertura}"></span>
+  </div>
+
+
+  <a href="/seguros/calculos/cotizacion/paso2">
+    <button type="button">Anterior</button>
+  </a>
+  <button type="submit">Siguiente</button>
+
+</form>
+
+</body>
+</html>

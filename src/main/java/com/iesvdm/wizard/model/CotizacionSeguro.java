@@ -20,7 +20,8 @@ public class CotizacionSeguro {
     private int anioNacimiento;
     private String marca;
     private String modelo;
-    private int anioMarca;
+    private int anioMat;
+    private int aniosCarnet;
     private String uso;
     private boolean asistencia;
     private boolean vehSustitucion;
