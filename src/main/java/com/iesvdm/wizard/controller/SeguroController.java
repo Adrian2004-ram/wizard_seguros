@@ -18,8 +18,6 @@ public class SeguroController {
     @GetMapping("/calculos/cotizacion/paso1")
     public String paso1(Model model, HttpSession session, @ModelAttribute CotizacionSeguro cotizacionSeguro) {
 
-        model.addAttribute("cotizacionSeguro", cotizacionSeguro);
-
         var cotizacionSeguroHttpSession = session.getAttribute("cotizacionSeguro");
 
         if (cotizacionSeguroHttpSession != null) {
@@ -69,25 +67,25 @@ public class SeguroController {
 
         var cotizacionSeguroHttpSesion = (CotizacionSeguro) session.getAttribute("cotizacionSeguro");
 
-        cotizacionSeguroHttpSesion.setMarca(cotizacionSeguro.getMarca());
-        cotizacionSeguroHttpSesion.setModelo(cotizacionSeguro.getModelo());
-        cotizacionSeguroHttpSesion.setAnioMat(cotizacionSeguro.getAnioMat());
-        cotizacionSeguroHttpSesion.setUso(cotizacionSeguro.getUso());
+        if (cotizacionSeguro.getTipoCobertura() == null) {
+
+            cotizacionSeguroHttpSesion.setMarca(cotizacionSeguro.getMarca());
+            cotizacionSeguroHttpSesion.setModelo(cotizacionSeguro.getModelo());
+            cotizacionSeguroHttpSesion.setAnioMat(cotizacionSeguro.getAnioMat());
+            cotizacionSeguroHttpSesion.setUso(cotizacionSeguro.getUso());
+
+        }
 
         model.addAttribute("cotizacionSeguro", cotizacionSeguro);
 
-        // Entre peticiones consecutivas se mantienene el mapa de httpSesion<String, Object>
+        model.addAttribute("datosConductor", cotizacionSeguroHttpSesion.getNombre()
+                                + " | " + cotizacionSeguroHttpSesion.getEdad()
+                                + " | " + cotizacionSeguroHttpSesion.getAniosCarnet());
 
-        model.addAttribute("cotizacionSeguro", cotizacionSeguro);
-
-        model.addAttribute("datosConductor", cotizacionSeguro.getNombre()
-                                + " | " + cotizacionSeguro.getEdad()
-                                + " | " + cotizacionSeguro.getAniosCarnet());
-
-        model.addAttribute("datosVehiculo", cotizacionSeguro.getMarca()
-                + " | " + cotizacionSeguro.getModelo()
-                + " | " + cotizacionSeguro.getAnioMat()
-                + " | " + cotizacionSeguro.getUso());
+        model.addAttribute("datosVehiculo", cotizacionSeguroHttpSesion.getMarca()
+                + " | " + cotizacionSeguroHttpSesion.getModelo()
+                + " | " + cotizacionSeguroHttpSesion.getAnioMat()
+                + " | " + cotizacionSeguroHttpSesion.getUso());
 
 
         if (cotizacionSeguro.getTipoCobertura() != null) {
@@ -96,9 +94,9 @@ public class SeguroController {
             cotizacionSeguroHttpSesion.setAsistencia(cotizacionSeguro.isAsistencia());
             cotizacionSeguroHttpSesion.setVehSustitucion(cotizacionSeguro.isVehSustitucion());
 
-            model.addAttribute("datosCobertura", cotizacionSeguro.getTipoCobertura()
-                    + " | " + cotizacionSeguro.isAsistencia()
-                    + " | " + cotizacionSeguro.isVehSustitucion());
+            model.addAttribute("datosCobertura", cotizacionSeguroHttpSesion.getTipoCobertura()
+                    + " | " + cotizacionSeguroHttpSesion.isAsistencia()
+                    + " | " + cotizacionSeguroHttpSesion.isVehSustitucion());
 
         }
 
